@@ -1,7 +1,7 @@
 def merge_sort(arr):
     """
-    split array into to sub arrays and keep spliting till we have only one elemnt in the left buttom and right 
-    button, then call the merge and pass the left ,right ,the original array
+    split array into two sub arrays and keep spliting till we have only one element in the left buttom and right 
+    buttom, then call the merge and pass the left ,right ,the original array
     """
     l=len(arr)
     mid=len(arr)//2
@@ -22,7 +22,7 @@ def merge(left,right,arr):
     sr=len(right)
     """
     if we exceed the left array length or the right array length that mean we exhausted the array
-    we overwirte the sorted value to the original array ,by then end of our recursion tree we will 
+    we overwirte the sorted value to the original array ,by the end of our recursion tree we will 
     overwrite all the values to its corresponding right positions
     """
     while(i<sl and j<sr):

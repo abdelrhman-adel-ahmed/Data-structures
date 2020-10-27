@@ -1,0 +1,41 @@
+def merge_sort(arr):
+    l=len(arr)
+    n=len(arr)//2
+    if(l<2):
+        return
+    left=arr[:n]
+    right=arr[n:]
+    merge_sort(left)
+    merge_sort(right)
+    merge(left,right,arr)
+
+def merge(left,right,arr):
+    i=0
+    j=0
+    k=0
+    sl=len(left)
+    sr=len(right)
+    while(i<sl and j<sr):
+        if(left[i]<=right[j]):
+            arr[k]=left[i]
+            i+=1
+        else:
+            arr[k]=right[j]
+            j+=1
+        k+=1
+    while(i<sl):
+        arr[k]=left[i]
+        i+=1
+        k+=1
+    while(j<sr):
+        arr[k]=right[j]
+        j+=1
+        k+=1
+
+if __name__ == '__main__':
+    arr = [12, 11, 13, 5, 6, 7] 
+    print ("Given array is", end ="\n") 
+    print(arr)
+    merge_sort(arr)
+    print("Sorted array is: ", end ="\n")
+    print(arr)

@@ -1,98 +1,41 @@
-#include <iostream>
-using namespace std;
+def merge_sort(arr):
+    l=len(arr)
+    mid=len(arr)//2
+    if(l<2):
+        return
+    left=arr[:mid]
+    right=arr[mid:]
+    merge_sort(left)
+    merge_sort(right)
+    merge(left,right,arr)
 
-void merge(int arr[], int l, int m, int r, int size)
-{
-    /* i is the first index of left sub-array ,j is the first index of the 
-    right sub-array , and k point to an index in the temporary array*/
-    int i = l;
-    int j = m + 1;
-    int k = l;
+def merge(left,right,arr):
+    i=0
+    j=0
+    k=0
+    sl=len(left)
+    sr=len(right)
+    while(i<sl and j<sr):
+        if(left[i]<=right[j]):
+            arr[k]=left[i]
+            i+=1
+        else:
+            arr[k]=right[j]
+            j+=1
+        k+=1
+    while(i<sl):
+        arr[k]=left[i]
+        i+=1
+        k+=1
+    while(j<sr):
+        arr[k]=right[j]
+        j+=1
+        k+=1
 
-    /* create temp array to store the sorted sub-array so far */
-    int* temp = new int[size]{0};
-
-    /* i<=m we can go from left to the middle index(left sub-array),and j start from
-    first element in the right sub-array to the last element to the last element 
-    in right sub-array with is r*/
-    while (i <= m && j <= r) {
-        if (arr[i] <= arr[j]) {
-            temp[k] = arr[i];
-            i++;
-        }
-        else {
-            temp[k] = arr[j];
-            j++;
-        }
-        k++;
-    }
-    /* Copy the remaining elements of first half, if there are any */
-    while (i <= m) {
-        temp[k] = arr[i];
-        i++;
-        k++;
-    }
-
-    /* Copy the remaining elements of second half, if there are any */
-    while (j <= r) {
-        temp[k] = arr[j];
-        j++;
-        k++;
-    }
-
-    /* Copy the temp array to original array(over write the orginal array
-    with the sorted part so far) 
-    i= to left not just zero because in the right of the *tree ,left will not be 
-    zero it will be diffrent (take the values of the right indexes,e.g 
-    if we have array of 5 element left tree left pointer will start at 3)*/
-
-    for (int p = l; p <= r; p++) {
-        arr[p] = temp[p];
-    }
-}
-
-/* l is for left index and r is
-right index of the
-sub-array of arr to be sorted */
-void mergeSort(int arr[], int l, int r, int size)
-{
-    if (l < r) {
-        // find midpoint
-        int m = (l + r) / 2;
-
-        /* recurcive mergesort first
-        and after reach 1 element left we go and call the right ,then we merge*/
-        mergeSort(arr, l, m, size);
-        mergeSort(arr, m + 1, r, size);
-
-        // merge
-        merge(arr, l, m, r, size);
-    }
-}
-
-int main()
-{
-    cout << "Enter size of array: " << endl;
-    int size;
-    cin >> size;
-    int* myarray = new int[size];
-
-    cout << "Enter " << size << " integers in any order: " << endl;
-    for (int i = 0; i < size; i++) {
-        cin >> myarray[i];
-    }
-    cout << "Before Sorting" << endl;
-    for (int i = 0; i < size; i++) {
-        cout << myarray[i] << " ";
-    }
-    cout << endl;
-    // mergesort(arr,left,right,size) called
-    mergeSort(myarray, 0, (size - 1), size);
-
-    cout << "After Sorting" << endl;
-    for (int i = 0; i < size; i++) {
-        cout << myarray[i] << " ";
-    }
-
-    return 0;
-}
+if __name__ == '__main__':
+    arr = [1,5,7,3,1,2,3,4,1,2,3,4,1,2,4,1,2,3,1,2,3,4,7,8,10] 
+    print ("Given array is: ") 
+    print(arr)
+    merge_sort(arr)
+    print("Sorted array is: ")
+    print(arr)

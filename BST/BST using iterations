@@ -1,0 +1,135 @@
+#include <iostream>
+using namespace std;
+
+class BstNode {
+
+public:
+    int data;
+    BstNode* left;
+    BstNode* right;
+    BstNode* root = NULL;
+public:
+    /* we want to change the address that the pointer point to ,so we pass the pointer
+    as refrence pointer
+    */
+    void insert_node(BstNode* node) {
+
+        if (root == NULL)
+            root = node;
+        else
+        {
+            BstNode* temp = root;
+            while (temp != NULL)
+            {
+                if (node->data <= temp->data && temp->left == NULL)
+                {
+                    temp->left = node;
+                    break;
+                }
+                else if (node->data <= temp->data)
+                {
+                    temp = temp->left;
+                }
+                else if (node->data > temp->data && temp->right == NULL)
+                {
+                    temp->right = node;
+                    break;
+                }
+                else { temp = temp->right; }
+            }
+        }
+
+    }
+    void insert(int data)
+    {
+        BstNode* node = new BstNode();
+        node->data = data;
+        node->right = NULL;
+        node->left = NULL;
+        insert_node(node);
+    }
+    bool search(int data)
+    {
+        if (root == NULL)return false;
+        else if (root->data == data)return true;
+        else
+        {
+            BstNode* temp = root;
+            while (temp != NULL)
+            {
+                if (data == temp->data)
+                {
+                    return true;
+                    break;
+                }
+                else if (data < temp->data && temp->left == NULL)
+                {
+                    return false;
+                }
+                else if (data < temp->data && temp->left != NULL)
+                {
+                    temp = temp->left;
+                }
+                else if (data > temp->data && temp->right == NULL)
+                {
+                    return false;
+                }
+                else if (data > temp->data && temp->right != NULL)
+                {
+                    temp = temp->right;
+                }
+            }
+        }
+    }
+    int min_elements()
+    {
+        BstNode* current = root;
+        if (root == NULL) return -1;
+        while (current->left != NULL)
+        {
+            current = current->left;
+        }
+        return current->data;
+    }
+    int max_elements()
+    {
+        BstNode* current = root;
+        if (root == NULL) return -1;
+        while (current->right != NULL)
+        {
+            current = current->right;
+        }
+        return current->data;
+    }
+
+};
+
+
+int main()
+{
+
+
+    BstNode* b = new BstNode;
+    b->insert(50);
+    b->insert(30);
+    b->insert(26);
+
+
+    cout << b->root->data << endl;
+    cout << b->root->left->data << endl;
+    cout << b->root->left->left->data << endl;
+    cout << b->search(1)<<endl;
+    cout << b->min_elements();
+
+
+
+    // b.insert(20);
+    // cout<<b.root<<endl;
+    // b.insert(17);
+    // b.insert(25);
+    // b.insert(16);
+    // cout << b.root;
+
+
+
+}

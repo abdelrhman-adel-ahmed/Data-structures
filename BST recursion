@@ -1,0 +1,109 @@
+#include <iostream>
+using namespace std;
+
+class BstNode {
+
+private:
+    int data;
+    BstNode* left;
+    BstNode* right;
+    BstNode* root = NULL;
+    int count = 0;
+
+    BstNode* insert_node(BstNode* root, BstNode* node) {
+
+
+        if (root == NULL) {
+            root = node;
+        }
+        else if (node->data <= root->data) {
+            root->left = insert_node(root->left, node);
+        }
+        else {
+            root->right = insert_node(root->right, node);
+        }
+        return root;
+    }
+    int min(BstNode* root)
+    {
+        if (root == NULL) { return 0; }
+        else if (root->left == NULL)
+            return root->data;
+        return min(root->left);
+    }
+    int max(BstNode* root)
+    {
+        if (root == NULL) { return 0; }
+        else if (root->right == NULL)
+            return root->data;
+        return min(root->right);
+    }
+    public:
+    /* each call to the function we can either explicitly set the root pointer 
+    * to point to the right node ,by set the return value equal to the left or 
+    * right pointer ,or implicitly do that by pass the pointer by refrence so it 
+    * get changed automatically each time we modify it  
+    */
+    /*
+    void insert_node(BstNode*& root,BstNode*& node) 
+    {
+        if (root == NULL) {
+            root = node;
+        }
+        else if (node->data <= root->data) {
+           insert_node(root->left,node);
+        }
+        else {
+            insert_node(root->right, node);
+        }
+    }
+    */
+   
+    void insert(int data)
+    {
+        BstNode* node = new BstNode();
+        node->data = data;
+        node->right = NULL;
+        node->left = NULL;
+        root=insert_node(root,node);
+        count++;
+    }
+    bool search(int data)
+    {
+        bool res;
+        res=find(root, data);
+        return res;
+    }
+    bool find(BstNode* root,int data)
+    {
+        if (root == NULL)return 0;
+        else if (root->data == data)return true;
+        else if (data <= root->data) return find(root->left, data);
+        else return find(root->right, data);
+    }
+    int size() { return count;}
+   
+    int min_elements() { return min(root); }
+    int max_elements() { return max(root); }
+
+};
+
+
+int main()
+{
+    
+    BstNode b;
+    b.insert(50);
+    b.insert(30);
+    b.insert(26);
+    b.insert(11);
+    b.insert(10);
+
+   // cout << b.root->data << endl;
+   // cout << b.root->left->data << endl;
+   // cout << b.root->left->left->data << endl;
+   // cout << b.root->left->left->left->data << endl;
+   // cout << b.root->left->left->left->left->data << endl;
+
+
+}

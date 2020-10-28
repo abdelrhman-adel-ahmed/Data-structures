@@ -10,9 +10,8 @@ private:
     BstNode* root = NULL;
     int count = 0;
 
+    // recursive function that insert node to its right poistion
     BstNode* insert_node(BstNode* root, BstNode* node) {
-
-
         if (root == NULL) {
             root = node;
         }
@@ -24,6 +23,7 @@ private:
         }
         return root;
     }
+//recursive function that find the minimum element in the tree
     int min(BstNode* root)
     {
         if (root == NULL) { return 0; }
@@ -31,6 +31,8 @@ private:
             return root->data;
         return min(root->left);
     }
+    
+//recursive function that find the maximum element in the tree    
     int max(BstNode* root)
     {
         if (root == NULL) { return 0; }
@@ -38,6 +40,15 @@ private:
             return root->data;
         return min(root->right);
     }
+//recursive function that returns whether the element in the tree or not
+    bool find(BstNode* root,int data)
+    {
+        if (root == NULL)return 0;
+        else if (root->data == data)return true;
+        else if (data <= root->data) return find(root->left, data);
+        else return find(root->right, data);
+    }
+    
     public:
     /* each call to the function we can either explicitly set the root pointer 
     * to point to the right node ,by set the return value equal to the left or 
@@ -74,13 +85,7 @@ private:
         res=find(root, data);
         return res;
     }
-    bool find(BstNode* root,int data)
-    {
-        if (root == NULL)return 0;
-        else if (root->data == data)return true;
-        else if (data <= root->data) return find(root->left, data);
-        else return find(root->right, data);
-    }
+  
     int size() { return count;}
    
     int min_elements() { return min(root); }
@@ -98,12 +103,5 @@ int main()
     b.insert(26);
     b.insert(11);
     b.insert(10);
-
-   // cout << b.root->data << endl;
-   // cout << b.root->left->data << endl;
-   // cout << b.root->left->left->data << endl;
-   // cout << b.root->left->left->left->data << endl;
-   // cout << b.root->left->left->left->left->data << endl;
-
 
 }

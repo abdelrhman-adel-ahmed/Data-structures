@@ -23,7 +23,7 @@ private:
         }
         return root;
     }
-//recursive function that find the minimum element in the tree
+//recursive function that find the minimum element in the treea
     int min(BstNode* root)
     {
         if (root == NULL) { return 0; }
@@ -48,7 +48,16 @@ private:
         else if (data <= root->data) return find(root->left, data);
         else return find(root->right, data);
     }
-    
+    /*return -1 if we in the leaf because the height of the leaf node is 0 so 
+    we return -1 for left and -1 for right -> max(-1,-1)+1 -> 0 so for the 
+    leaf nodes we return 0 as the height of that node*/
+    int find_height(BstNode* root)
+    {
+        if (root == NULL)
+            return -1;
+        else return max(find_height(root->left), find_height(root->right)) + 1;
+
+    }
     public:
     /* each call to the function we can either explicitly set the root pointer 
     * to point to the right node ,by set the return value equal to the left or 
@@ -85,11 +94,18 @@ private:
         res=find(root, data);
         return res;
     }
-  
+      int height()
+    {
+         int res=find_height(root);
+        return res;
+    }
+
     int size() { return count;}
    
     int min_elements() { return min(root); }
     int max_elements() { return max(root); }
+    int num_edges() { return count - 1; }
+    int num_nodes() { return count; }
 
 };
 

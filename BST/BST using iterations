@@ -3,11 +3,22 @@ using namespace std;
 
 class BstNode {
 
-public:
+private:
     int data;
     BstNode* left;
     BstNode* right;
     BstNode* root = NULL;
+    
+     /*return -1 if we in the leaf because the height of the leaf node is 0 so 
+    we return -1 for left and -1 for right -> max(-1,-1)+1 -> 0 so for the 
+    leaf nodes we return 0 as the height of that node*/
+    int find_height(BstNode* root)
+    {
+        if (root == NULL)
+            return -1;
+        else return max(find_height(root->left), find_height(root->right)) + 1;
+
+    }
 public:
     /* we want to change the address that the pointer point to ,so we pass the pointer
     as refrence pointer
@@ -101,6 +112,14 @@ public:
         }
         return current->data;
     }
+    int num_edges() { return count - 1; }
+    int num_nodes() { return count; }
+    int height()
+    {
+         int res=find_height(root);
+        return res;
+    }
+    
 
 };
 

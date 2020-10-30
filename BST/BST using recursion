@@ -62,7 +62,17 @@ private:
         else return max(find_height(root->left), find_height(root->right)) + 1;
 
     }
-        void bfs_preorder(BstNode* root)
+     BstNode* get_address(BstNode* root, int data)
+    {
+        if (root == NULL)return root;
+        else if (data == root->data)return root;
+        else if (data <= root->data)
+            return get_address(root->left, data);
+        else
+            return get_address(root->right,data);
+    }
+    
+    void bfs_preorder(BstNode* root)
     {
         if (root == NULL)
             return;
@@ -93,6 +103,7 @@ private:
         bfs_postorder(root->right);
         cout << root->data << " ";
     }
+    
     
     public:
     /* each call to the function we can either explicitly set the root pointer 
@@ -140,38 +151,9 @@ private:
         insert_node(node);
         count++;
     }
-    BstNode* get_node_address(int data)
+      BstNode* get_node_address(int data)
     {
-        if (root == NULL)return root;
-        else if (root->data == data)return root;
-        else
-        {
-            BstNode* temp = root;
-            while (temp != NULL)
-            {
-                if (data == temp->data)
-                {
-                    return temp;
-                    break;
-                }
-                else if (data < temp->data && temp->left == NULL)
-                {
-                    return NULL;
-                }
-                else if (data < temp->data && temp->left != NULL)
-                {
-                    temp = temp->left;
-                }
-                else if (data > temp->data && temp->right == NULL)
-                {
-                    return NULL;
-                }
-                else if (data > temp->data && temp->right != NULL)
-                {
-                    temp = temp->right;
-                }
-            }
-        }
+        return get_address(root, data);
     }
     bool search(int data)
     {

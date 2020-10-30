@@ -1,0 +1,8 @@
+from functools import lru_cache
+# lru --> least recently used cache 
+
+@lru_cache(maxsize=1000) #inital size 100
+def fib(x):
+    if(x <=1):
+        return x
+    else: return fib(x-2)+fib(x-1)

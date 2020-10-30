@@ -92,6 +92,41 @@ public:
             }
         }
     }
+   BstNode* get_node_address(int data)
+    {
+       
+       if (root == NULL)return root;
+       else if (root->data == data)return root;
+       else
+       {
+           BstNode* temp = root;
+           while (temp != NULL)
+           {
+               if (data == temp->data)
+               {
+                   return temp;
+                   break;
+               }
+               else if (data < temp->data && temp->left == NULL)
+               {
+                   return NULL;
+               }
+               else if (data < temp->data && temp->left != NULL)
+               {
+                   temp = temp->left;
+               }
+               else if (data > temp->data && temp->right == NULL)
+               {
+                   return NULL;
+               }
+               else if (data > temp->data && temp->right != NULL)
+               {
+                   temp = temp->right;
+               }
+           }
+       }
+    }
+
     int min_elements()
     {
         BstNode* current = root;

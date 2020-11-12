@@ -13,7 +13,8 @@ private:
         if (root == NULL) {
             root = node;
         }
-        else if (node->data <= root->data) {
+        else if(root->data==node->data)return root;
+        else if (node->data < root->data) {
             root->left = insert_node(root->left, node);
         }
         else {
@@ -185,7 +186,8 @@ public:
         if (root == NULL) {
             root = node;
         }
-        else if (node->data <= root->data) {
+        else if(root->data==node->data)return;
+        else if (node->data < root->data) {
            insert_node(root->left,node);
         }
         else {

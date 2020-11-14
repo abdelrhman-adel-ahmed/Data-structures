@@ -40,9 +40,9 @@ public:
   void rotate_left(avl*& node)
     {
         avl* temp=node;
-        avl* temp1 = temp->left;
-        temp->left = temp1->right;
-        temp1->right = temp;
+        avl* temp1 = temp->right;
+        temp->right = temp1->left;
+        temp1->left = temp;
        // temp->factor = balance_factor(temp);
        // temp1->factor = balance_factor(temp1);
        //temp->update_Height();

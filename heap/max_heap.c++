@@ -2,6 +2,7 @@ class max_heap
 {
 public:
     int size = 0;
+    //first place in the vector is dangling ,to keep our equtions right (0 * _ =0)
     vector<int>v = { -1 };
     int p(int index) { return index >> 1; }// index/2
     int l(int index) { return index << 1; }; //index *2
@@ -45,7 +46,9 @@ public:
     }
     void insert_item(int item)
     {
+        //make space for out new entry ,if there is not space
         if (size + 1 >= v.size()) v.push_back(0);
+        //update the size and put our new item in that index
         v[++size] = item;
         correct_up(size);
     }

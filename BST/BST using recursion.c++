@@ -152,8 +152,8 @@ private:
         * we start from the root if we go left then this the first ancestor we could have
         * then if we go left again then this is the depest ancestor we get so far ,and
         so one .
-        ** the idea is inorder goes <left><root><right> so if so the element that get
-        * printed is the
+        ** he idea is inorder goes <left><root><right> so we need to find the first node 
+          *that our node will be in its left ,that mean it will get printed after our node
         */
         else
         {

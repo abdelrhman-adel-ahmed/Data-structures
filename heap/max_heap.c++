@@ -62,6 +62,7 @@ public:
     {
         for (int i = 1; i < v.size(); i++)
             cout << v[i] << " ";
+        if (v.size() == 1)cout << v[1];
         cout << "\n";
     }
     int get_max()

@@ -1,0 +1,74 @@
+class max_heap
+{
+public:
+    int size = 0;
+    vector<int>v = { -1 };
+    int p(int index) { return index >> 1; }// index/2
+    int l(int index) { return index << 1; }; //index *2
+    int r(int index) { return (index << 1) + 1; } //index *2 +1
+public:
+
+    bool is_empty() { return size == 0; }
+    void correct_up(int index)
+    {
+        if (index == 1)return;
+
+        //if the node is greater than its parent
+        if (v[index] > v[index / 2])
+            swap(v[index], v[index / 2]);
+        correct_up(index / 2);
+    }
+ 
+    void correct_down(int index)
+    {
+        /* 1-get the left index
+        *  2- check if it bigger than the parent ,if it bigger change swapid to the left
+        *  3- now check the right with the left ,if it bigger then we will swap the parent with it 
+        *  4- we stop when there is no element bigger than the parent meaning it reach the correct place
+        *  5- or the index is bigger than the size we return to previous call meaning we try to reach node 
+        * outside the array.
+       */
+       //if (index > size)return;    
+        int swapid = index;
+
+        if (l(index) <= size && v[index] < v[l(index)])
+            swapid = l(index);
+
+        if (r(index) <= size && v[swapid] < v[r(index)])
+            swapid = r(index);
+        if (swapid != index)
+        {
+            swap(v[index], v[swapid]);
+            correct_down(swapid);
+        }
+
+    }
+    void insert_item(int item)
+    {
+        if (size + 1 >= v.size()) v.push_back(0);
+        v[++size] = item;
+        correct_up(size);
+    }
+    void delet()
+    {
+        swap(v[1], v[size--]);
+        v.pop_back();
+        correct_down(1);
+    }
+    void print()
+    {
+        for (int i = 1; i < v.size(); i++)
+            cout << v[i] << " ";
+        cout << "\n";
+    }
+    int get_max()
+    {
+       return v[1];
+    }
+    int extract_max()
+    {
+        int max = v[1];
+        delet();
+        return max;
+    }
+};

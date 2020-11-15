@@ -68,11 +68,11 @@ public:
         while (node->left != NULL)node = node->left;
         return node;
     }
-    avl *del(avl*& root, int data)
+    void del(avl*& root, int data)
     {
-        if (root == NULL) return root;
-        else if (root->data > data) root->left = del(root->left, data);
-        else if (root->data < data) root->right = del(root->right, data);
+        if (root == NULL) return;
+        else if (root->data > data) del(root->left, data);
+        else if (root->data < data) del(root->right, data);
         else
         {
             // no childern (leaf node)
@@ -113,7 +113,6 @@ public:
         }
         if(root!=NULL)
             balance(root);
-        return root;
     }
      void BFS(avl* root)
     {

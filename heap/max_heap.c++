@@ -19,14 +19,14 @@ public:
             swap(v[index], v[index / 2]);
         correct_up(index / 2);
     }
- 
+
     void correct_down(int index)
     {
         /* 1-get the left index
         *  2- check if it bigger than the parent ,if it bigger change swapid to the left
-        *  3- now check the right with the left ,if it bigger then we will swap the parent with it 
+        *  3- now check the right with the left ,if it bigger then we will swap the parent with it
         *  4- we stop when there is no element bigger than the parent meaning it reach the correct place
-        *  5- or the index is bigger than the size we return to previous call meaning we try to reach node 
+        *  5- or the index is bigger than the size we return to previous call meaning we try to reach node
         * outside the array.
        */
        //if (index > size)return;    
@@ -55,7 +55,6 @@ public:
     void delet()
     {
         swap(v[1], v[size--]);
-        v.pop_back();
         correct_down(1);
     }
     void print()
@@ -67,7 +66,7 @@ public:
     }
     int get_max()
     {
-       return v[1];
+        return v[1];
     }
     int extract_max()
     {
@@ -75,4 +74,23 @@ public:
         delet();
         return max;
     }
+    void heap_sort()
+    {
+        while (size)
+        {
+            delet();
+        }
+        for (int i = 1; i < v.size(); i++)
+        {
+            cout << v[i] << " ";
+        }
+        cout << "\n";
+    }
+    //not complete
+    void correct_after()
+    {
+        size = v.size() - 1;
+        correct_down(1);
+    }
 };
+

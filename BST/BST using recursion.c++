@@ -147,13 +147,18 @@ private:
             // we can also use while loop to get the address of left most node 
             return find_min(current->right);
         }
-        //node has no right_sub tree
-        /*
-        * we start from the root if we go left then this the first ancestor we could have
-        * then if we go left again then this is the depest ancestor we get so far ,and
-        so one .
-        ** he idea is inorder goes <left><root><right> so we need to find the first node 
-          *that our node will be in its left ,that mean it will get printed after our node
+       //node has no right_sub tree
+
+        /*start from the root we go left and each time we go left we update the sucssor ,
+        * meaning the current node is not yet in the left ,(we need to find the first node that our node
+        will be in its left child ,meaning we will visit it next because it unvisited)
+
+        * (if the node doesnot have right subtree so we need to go to the nearest ancestor
+        * for which given node will be in the left sub tree of that ancestor.)
+        *
+        * i want to find the first node that i will be in its left 
+        * 
+        ** the idea is inorder goes <left><root><right> 
         */
         else
         {

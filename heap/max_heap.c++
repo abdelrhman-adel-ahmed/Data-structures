@@ -87,6 +87,7 @@ public:
         cout << "\n";
     }
     //take a vector and max_heapify it complexity is o(n)
+    //start from non leaf node (assume that leaf is already sorted) so starting index (n/2)
      void max_heapify(vector<int>& a, int index)
     {
         int l = index * 2;

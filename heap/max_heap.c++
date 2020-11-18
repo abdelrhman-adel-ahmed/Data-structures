@@ -86,11 +86,25 @@ public:
         }
         cout << "\n";
     }
-    //not complete
-    void correct_after()
+    //take a vector and max_heapify it complexity is o(n)
+     void max_heapify(vector<int>& a, int index)
     {
-        size = v.size() - 1;
-        correct_down(1);
+        int l = index * 2;
+        int r = index * 2 + 1;
+        int length = a.size() - 1;
+        int swapid = index;
+        if (index == 0)return;
+         
+        if (l <= length && a[l] > a[index])
+            swapid = l;
+        if (r <= length && a[r] > a[swapid])
+            swapid = r;
+        if (index != swapid) {
+            swap(a[index], a[swapid]);
+            max_heapify(a, swapid);
+        }
+        max_heapify(a, swapid-1);
     }
+
 };
 

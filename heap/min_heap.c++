@@ -55,6 +55,8 @@ public:
     }
     void heap_sort()
     {
+        //get the size in case we use heapify and get an outer vector that we dont know its size,because size get increamented when we insert using insert method
+        size = v.size()-1;
         while (size)
         {
             delte();

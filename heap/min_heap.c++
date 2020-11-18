@@ -66,6 +66,7 @@ public:
         cout << "\n";
     }
      //take a vector and min_heapify it complexity is o(n)
+     //index start from a nonleaf node which is floor(n/2), note that leaf nodes start at floor(n/2)+1
      void min_heapify(vector<int>& a, int index)
     {
         int l = index * 2;

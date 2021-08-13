@@ -13,7 +13,7 @@ private:
         if (root == NULL) {
             root = node;
         }
-        else if(root->data==node->data)return root;
+        else if(root->data==node->data)return root;//no duplicate
         else if (node->data < root->data) {
             root->left = insert_node(root->left, node);
         }

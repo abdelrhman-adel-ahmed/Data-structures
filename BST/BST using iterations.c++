@@ -16,6 +16,7 @@ private:
     {
         if (root == NULL)
             return -1;
+        //hegiht of node is the max height of the left subtree ,right subtree (+1) for the edge that connect the node to the max of them 
         else return max(find_height(root->left), find_height(root->right)) + 1;
 
     }

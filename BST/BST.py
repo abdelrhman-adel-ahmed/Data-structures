@@ -1,3 +1,6 @@
+from queue import Queue
+
+
 class Node:
     def __init__(self):
         self.data = None
@@ -8,6 +11,7 @@ class Node:
 class BST:
     def __init__(self):
         self.root = None
+        self.queuy = Queue()
 
     def insert_node_rescusrion(self, root, node):
         if root == None:
@@ -156,13 +160,13 @@ class BST:
         depth = self.depth(find_node)
         return depth
 
-    def delete(self, root, data):
+    def _delete(self, root, data):
         if root == None:
             return root  # note found
         elif root.data > data:
-            root.left = self.delete(root.left, data)
+            root.left = self._delete(root.left, data)
         elif root.data < data:
-            root.right = self.delete(root.right, data)
+            root.right = self._delete(root.right, data)
         else:
             if root.left == None:  # only right child or no childern(leaf node)
                 temp = root
@@ -175,12 +179,57 @@ class BST:
             else:
                 min = self.min(root)
                 root.data = min.data
-                self.delete(root.right, min.data)
+                self._delete(root.right, min.data)
         return root
 
     def delete_node(self, data):
-        n = self.delete(self.root, data)
-        return n
+        self.root = self._delete(self.root, data)
+
+    def display_bft(self):  # breadth first traversal
+        root = self.root
+
+        if root == None:
+            print("Tree is empty")
+            return
+
+        self.queuy.put(root)
+        while not self.queuy.empty():
+            temp = self.queuy.get()
+            print(temp.data)
+            if temp.left != None:
+                self.queuy.put(temp.left)
+            if temp.right != None:
+                self.queuy.put(temp.right)
+
+    def _inorder(self, root):
+        if root == None:
+            return
+        self._inorder(root.left)
+        print(root.data)
+        self._inorder(root.right)
+
+    def _preorder(self, root):
+        if root == None:
+            return
+        print(root.data)
+        self._preorder(root.left)
+        self._preorder(root.right)
+
+    def _postorder(self, root):
+        if root == None:
+            return
+        self._postorder(root.left)
+        self._postorder(root.right)
+        print(root.data)
+
+    def dfs_perorder(self):  # depth first search traversal <root><left><right>
+        self._preorder(self.root)
+
+    def dfs_inorder(self):  # depth first search traversal <left><root><right>
+        self._inorder(self.root)
+
+    def dfs_postorder(self):  # depth first search traversal <left><right><root>
+        self._postorder(self.root)
 
 
 b = BST()
@@ -191,6 +240,3 @@ b.insert_recursion(27)
 b.insert_recursion(17)
 b.insert_recursion(13)
 b.insert_recursion(18)
-
-print(b.delete_node(17).data)
-print(b.root.right.left.data)

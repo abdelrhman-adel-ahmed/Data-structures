@@ -54,11 +54,22 @@ class BST:
             raise "no nodes in the tree"
         while root.right != None:
             root = root.right
-        return root.data
+        return root
 
     def find_max(self):
         max = self.max(self.root)
-        return max
+        return max.data
+
+    def min(self, root):
+        if root == None:
+            raise "no nodes in the tree"
+        while root.right != None:
+            root = root.right
+        return root
+
+    def find_min(self):
+        min = self.min(self.root)
+        return min.data
 
     def max_recursion(self, root):
         if root == None:
@@ -72,9 +83,6 @@ class BST:
         """ find max element in the tree using recursion"""
         max = self.max_recursion(self.root)
         return max
-
-    def find_height(self):
-        pass
 
     def recusrive_search(self, root, data):
         if root == None:
@@ -132,16 +140,6 @@ class BST:
         from a node to a leaf node)
         """
         find_node = self.recusrive_search(self.root, data)[1]
-        height = self.height(find_node)
-        if height == -1:
-            return "node doesnot exist"
-        return height
-
-    def find_height(self, data):
-        """find heigh of a node,(hegiht is number of edges in the longest path
-        from a node to a leaf node)
-        """
-        find_node = self.recusrive_search(self.root, data)[1]
         height = self.recursive_height(find_node)
         if height == -1:
             return "node doesnot exist"
@@ -158,23 +156,41 @@ class BST:
         depth = self.depth(find_node)
         return depth
 
+    def delete(self, root, data):
+        if root == None:
+            return root  # note found
+        elif root.data > data:
+            root.left = self.delete(root.left, data)
+        elif root.data < data:
+            root.right = self.delete(root.right, data)
+        else:
+            if root.left == None:  # only right child
+                temp = root
+                root = root.right
+                del temp
+            elif root.right == None:  # only left child
+                temp = root
+                root = root.left
+                del temp
+            else:
+                min = self.min(root)
+                root.data = min.data
+                self.delete(root.right, min.data)
+        return root
+
+    def delete_node(self, data):
+        n = self.delete(self.root, data)
+        return n
+
 
 b = BST()
 b.insert(12)
 
 b.insert_recursion(20)
-b.insert(5)
 b.insert_recursion(27)
 b.insert_recursion(17)
-b.insert_recursion(29)
-b.insert_recursion(15)
 b.insert_recursion(13)
-b.insert_recursion(14)
+b.insert_recursion(18)
 
-print(b.root.data)
-print(b.root.right.data)
-print(b.root.right.right.data)
-print(b.find_max_recursion())
-print(b.search(3))
-print(b.find_height(20))
-print(b.find_depth(14))
+print(b.delete_node(17).data)
+print(b.root.right.left.data)

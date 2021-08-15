@@ -164,7 +164,7 @@ class BST:
         elif root.data < data:
             root.right = self.delete(root.right, data)
         else:
-            if root.left == None:  # only right child
+            if root.left == None:  # only right child or no childern(leaf node)
                 temp = root
                 root = root.right
                 del temp

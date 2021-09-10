@@ -46,4 +46,15 @@ class linkedList:
             return 
         print(head.next.data)
         self.display_using_Rec(head.next)
+        
+  def recursive_reverse(self, temp):
+    # recuse untill we reach the last node and make the head point to it
+    # and then for each node the node after it will point to it ,and the next
+    # of the node it self will be None.
+    if temp.next == None:
+        self.head.next = temp
+        return
+    self.reverse(temp.next)
+    temp.next.next = temp
+    temp.next = None
     

@@ -38,7 +38,7 @@ public:
 
 	bool is_full()
 	{
-		//the next position of the rear in circualr interpretation is front so the queue is full
+		//the next position of the rear in circualr interpretation is front so the queue is full, so there is not unused cells 
 		if (((rear + 1) % S) == front) { return true; }
 		else { return false; }
 	}

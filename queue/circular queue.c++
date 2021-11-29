@@ -26,6 +26,7 @@ public:
 	void pop_front()
 	{
 		if (is_empty()) { cerr << "queue is empty"; }
+		//rear == front meaning that i have only one element in the queue
 		else if (rear == front) { front = rear = -1; }
 		else { front = (front + 1) % S; }
 	}

@@ -19,7 +19,7 @@ public:
 		{
 			rear = front = 0;
 		}
-		else { rear = (rear + 1) % S; } //--> use circale array to solve the problem of pop
+		else { rear = (rear + 1) % S; } //--> use circale array to solve the problem of pop, so the next index is not just rear+1 its rear+1 %size
 
 		arr[rear] = val;
 	}
